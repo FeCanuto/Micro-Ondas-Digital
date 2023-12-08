@@ -54,32 +54,34 @@ namespace MicroOndasDigital
             this.relogioLabel = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.displayInfo = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.pipocaButton = new System.Windows.Forms.Button();
+            this.leiteButton = new System.Windows.Forms.Button();
+            this.boiButton = new System.Windows.Forms.Button();
+            this.nuggetsButton = new System.Windows.Forms.Button();
+            this.feijaoButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // iniciarButton
             // 
+            this.iniciarButton.BackColor = System.Drawing.Color.LightGreen;
             this.iniciarButton.Location = new System.Drawing.Point(442, 302);
             this.iniciarButton.Name = "iniciarButton";
             this.iniciarButton.Size = new System.Drawing.Size(75, 23);
             this.iniciarButton.TabIndex = 0;
             this.iniciarButton.Text = "Iniciar / 30s";
-            this.iniciarButton.UseVisualStyleBackColor = true;
+            this.iniciarButton.UseVisualStyleBackColor = false;
             // 
             // pausarButton
             // 
+            this.pausarButton.BackColor = System.Drawing.Color.Tomato;
             this.pausarButton.Location = new System.Drawing.Point(339, 302);
             this.pausarButton.Name = "pausarButton";
             this.pausarButton.Size = new System.Drawing.Size(97, 23);
             this.pausarButton.TabIndex = 1;
             this.pausarButton.Text = "Pause/Cancel";
-            this.pausarButton.UseVisualStyleBackColor = true;
+            this.pausarButton.UseVisualStyleBackColor = false;
             // 
             // buttonNumber2
             // 
@@ -224,7 +226,7 @@ namespace MicroOndasDigital
             this.relogioLabel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.relogioLabel.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.relogioLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.relogioLabel.Location = new System.Drawing.Point(332, 6);
+            this.relogioLabel.Location = new System.Drawing.Point(343, 6);
             this.relogioLabel.Name = "relogioLabel";
             this.relogioLabel.Size = new System.Drawing.Size(174, 51);
             this.relogioLabel.TabIndex = 18;
@@ -237,57 +239,62 @@ namespace MicroOndasDigital
             // 
             // displayInfo
             // 
-            this.displayInfo.Location = new System.Drawing.Point(3, 12);
+            this.displayInfo.Location = new System.Drawing.Point(3, 6);
             this.displayInfo.Multiline = true;
             this.displayInfo.Name = "displayInfo";
             this.displayInfo.ReadOnly = true;
             this.displayInfo.Size = new System.Drawing.Size(323, 292);
             this.displayInfo.TabIndex = 19;
             // 
-            // button1
+            // pipocaButton
             // 
-            this.button1.Location = new System.Drawing.Point(349, 244);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(53, 23);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Pipoca";
-            this.button1.UseVisualStyleBackColor = true;
+            this.pipocaButton.Location = new System.Drawing.Point(349, 244);
+            this.pipocaButton.Name = "pipocaButton";
+            this.pipocaButton.Size = new System.Drawing.Size(53, 23);
+            this.pipocaButton.TabIndex = 20;
+            this.pipocaButton.Text = "Pipoca";
+            this.pipocaButton.UseVisualStyleBackColor = true;
+            this.pipocaButton.Click += new System.EventHandler(this.pipocaButton_Click);
             // 
-            // button2
+            // leiteButton
             // 
-            this.button2.Location = new System.Drawing.Point(408, 244);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(53, 23);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Leite";
-            this.button2.UseVisualStyleBackColor = true;
+            this.leiteButton.Location = new System.Drawing.Point(408, 244);
+            this.leiteButton.Name = "leiteButton";
+            this.leiteButton.Size = new System.Drawing.Size(53, 23);
+            this.leiteButton.TabIndex = 21;
+            this.leiteButton.Text = "Leite";
+            this.leiteButton.UseVisualStyleBackColor = true;
+            this.leiteButton.Click += new System.EventHandler(this.leiteButton_Click);
             // 
-            // button3
+            // boiButton
             // 
-            this.button3.Location = new System.Drawing.Point(332, 273);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(97, 23);
-            this.button3.TabIndex = 22;
-            this.button3.Text = "Carne Bovina";
-            this.button3.UseVisualStyleBackColor = true;
+            this.boiButton.Location = new System.Drawing.Point(332, 273);
+            this.boiButton.Name = "boiButton";
+            this.boiButton.Size = new System.Drawing.Size(97, 23);
+            this.boiButton.TabIndex = 22;
+            this.boiButton.Text = "Carne Bovina";
+            this.boiButton.UseVisualStyleBackColor = true;
+            this.boiButton.Click += new System.EventHandler(this.boiButton_Click);
             // 
-            // button4
+            // nuggetsButton
             // 
-            this.button4.Location = new System.Drawing.Point(431, 273);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(97, 23);
-            this.button4.TabIndex = 23;
-            this.button4.Text = "Carne Frango";
-            this.button4.UseVisualStyleBackColor = true;
+            this.nuggetsButton.Location = new System.Drawing.Point(431, 273);
+            this.nuggetsButton.Name = "nuggetsButton";
+            this.nuggetsButton.Size = new System.Drawing.Size(97, 23);
+            this.nuggetsButton.TabIndex = 23;
+            this.nuggetsButton.Text = "Carne Frango";
+            this.nuggetsButton.UseVisualStyleBackColor = true;
+            this.nuggetsButton.Click += new System.EventHandler(this.nuggetsButton_Click);
             // 
-            // button5
+            // feijaoButton
             // 
-            this.button5.Location = new System.Drawing.Point(467, 244);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(53, 23);
-            this.button5.TabIndex = 24;
-            this.button5.Text = "Feijão";
-            this.button5.UseVisualStyleBackColor = true;
+            this.feijaoButton.Location = new System.Drawing.Point(467, 244);
+            this.feijaoButton.Name = "feijaoButton";
+            this.feijaoButton.Size = new System.Drawing.Size(53, 23);
+            this.feijaoButton.TabIndex = 24;
+            this.feijaoButton.Text = "Feijão";
+            this.feijaoButton.UseVisualStyleBackColor = true;
+            this.feijaoButton.Click += new System.EventHandler(this.feijaoButton_Click);
             // 
             // listView1
             // 
@@ -298,7 +305,7 @@ namespace MicroOndasDigital
             listViewItem3,
             listViewItem4,
             listViewItem5});
-            this.listView1.Location = new System.Drawing.Point(190, 193);
+            this.listView1.Location = new System.Drawing.Point(189, 183);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(126, 103);
             this.listView1.TabIndex = 25;
@@ -312,11 +319,11 @@ namespace MicroOndasDigital
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(536, 330);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.feijaoButton);
+            this.Controls.Add(this.nuggetsButton);
+            this.Controls.Add(this.boiButton);
+            this.Controls.Add(this.leiteButton);
+            this.Controls.Add(this.pipocaButton);
             this.Controls.Add(this.displayInfo);
             this.Controls.Add(this.relogioLabel);
             this.Controls.Add(this.potenciaTextBox);
@@ -352,15 +359,11 @@ namespace MicroOndasDigital
         private Label relogioLabel;
         private System.Windows.Forms.Timer timer1;
         private TextBox displayInfo;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
+        private Button pipocaButton;
+        private Button leiteButton;
+        private Button boiButton;
+        private Button nuggetsButton;
+        private Button feijaoButton;
         private ListView listView1;
-
-        public event EventHandler IniciarAquecimento;
-        public event EventHandler PausarAquecimento;
-        public event EventHandler<string> SelecionarPrograma;
     }
 }

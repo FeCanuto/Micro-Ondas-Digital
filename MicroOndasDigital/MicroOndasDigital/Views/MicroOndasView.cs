@@ -4,17 +4,21 @@ namespace MicroOndasDigital
 {
     public partial class MicroOndasView : Form, IMicroOndasView
     {
-        //private string Temporizador;
         private int Segundos;
         private bool Incrementar;
+        private bool Predefinido;
+
 
         public event EventHandler? InicializaoRapidaEvent;
         public event EventHandler? PausarAquecimentoEvent;
-        public event EventHandler<string>? SelecionarProgramaEvent;
+        public event EventHandler? SelecionarProgramaEvent;
 
-        public string TempoValue { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string Alimento { get; set; } = string.Empty;
+        public string Instrucoes { get; set; } = string.Empty;
+        public string TempoValue { get; set; } = string.Empty;
         public string PotenciaValue { get => potenciaTextBox.Text; set => potenciaTextBox.Text = value; }
-        public string Display { get => displayInfo.Text; set => displayInfo.Text = value; }
+        public string StringAquecimento { get; set; } = string.Empty;
         public bool Pausar { get; set; }
         public bool Limpar { get; set; }
 
@@ -23,7 +27,8 @@ namespace MicroOndasDigital
             InitializeComponent();
             AssociateAndRaiseViewEvents();
 
-            //Valor default para potência
+            //Valores default
+            StringAquecimento = ".";
             relogioLabel.Text = "00:00:00";
             TempoValue = "0";
             potenciaTextBox.Text = "10";
@@ -114,11 +119,15 @@ namespace MicroOndasDigital
             iniciarButton.Click += delegate { 
                 InicializaoRapidaEvent?.Invoke(this, EventArgs.Empty);
 
+                //Conversão inicial da string tempo em int segundos 
                 if(Incrementar == false)
                     Segundos = int.Parse(TempoValue);
 
-                if (Segundos is >= 1 and <= 120)
+                //Se estiver dentro do intervalo permitido e não for um programa pre-definido
+                if (Segundos is >= 1 and <= 120 && Predefinido == false)
                 {
+                    /*Apenas Icrementar caso o programa não esteje pausado e o valor em segundos
+                    for menor ou igual a 90 para não estourar o valor limite de 2min*/
                     if (Incrementar && Pausar != true && Segundos <= 90)
                         Segundos += 30;
 
@@ -126,8 +135,16 @@ namespace MicroOndasDigital
                     relogioLabel.Text = TempoFormatado(Segundos);
                     timer1.Start();
                 }
+                //Caso seja um programa pre-definido
+                else if (Predefinido == true)
+                {
+                    //Iniciar o temporizador do micro-ondas
+                    relogioLabel.Text = TempoFormatado(Segundos);
+                    timer1.Start();
+                }
                 else
                 {
+                    //Caso o usuário queira incrementar o tempo além do permitido
                     MessageBox.Show($"Valor fora do intervalo permitido, mínimo 1s - máximo 120s");
 
                     if (Segundos <= 200)
@@ -159,7 +176,7 @@ namespace MicroOndasDigital
             string pontos = "";
 
             for (int i = 0; i < potencia; i++)
-                pontos += ".";
+                pontos += StringAquecimento;
 
             if (Segundos > 0)
             {
@@ -179,14 +196,17 @@ namespace MicroOndasDigital
 
         private void LimparDados()
         {
+            //Restaurando dados a valores iniciais
             displayInfo.Text = "";
             relogioLabel.Text = TempoFormatado(0);
             TempoValue = "0";
             PotenciaValue = "10";
             Segundos = 0;
             Incrementar = false;
+            Predefinido = false;
         }
 
+        //Formatando tempo
         private static string TempoFormatado(string segundos)
         {
             TimeSpan tempo;
@@ -207,6 +227,53 @@ namespace MicroOndasDigital
         {
             TimeSpan tempo = TimeSpan.FromSeconds(segundos);
             return tempo.ToString();
+        }
+
+        private void pipocaButton_Click(object sender, EventArgs e)
+        {
+            StringAquecimento = "!";
+            SelecionarProgramaEvent?.Invoke(this, EventArgs.Empty);
+            Predefinido = true;
+            ProgramasInfo();
+        }
+
+        private void leiteButton_Click(object sender, EventArgs e)
+        {
+            StringAquecimento = "@";
+            SelecionarProgramaEvent?.Invoke(this, EventArgs.Empty);
+            Predefinido = true;
+            ProgramasInfo();
+        }
+
+        private void feijaoButton_Click(object sender, EventArgs e)
+        {
+            StringAquecimento = "#";
+            SelecionarProgramaEvent?.Invoke(this, EventArgs.Empty);
+            Predefinido = true;
+            ProgramasInfo();
+        }
+
+        private void boiButton_Click(object sender, EventArgs e)
+        {
+            StringAquecimento = "$";
+            SelecionarProgramaEvent?.Invoke(this, EventArgs.Empty);
+            Predefinido = true;
+            ProgramasInfo();
+        }
+
+        private void nuggetsButton_Click(object sender, EventArgs e)
+        {
+            StringAquecimento = "%";
+            SelecionarProgramaEvent?.Invoke(this, EventArgs.Empty);
+            Predefinido = true;
+            ProgramasInfo();
+        }
+
+        private void ProgramasInfo()
+        {
+            displayInfo.Text += "Programa: " + Nome + "\r\n";
+            displayInfo.Text += "Alimento: " + Alimento + "\r\n";
+            displayInfo.Text += "Instruções: " + Instrucoes + "\r\n";
         }
     }
 }
