@@ -5,8 +5,10 @@ namespace MicroOndasDigital.Views
     {
         string TempoValue { get; set; }
         string PotenciaValue { get; set; }
+        string Display { get; set; }
         bool Pausar { get; set; }
         bool Limpar { get; set; }
+
 
         //Eventos
         event EventHandler InicializaoRapidaEvent;

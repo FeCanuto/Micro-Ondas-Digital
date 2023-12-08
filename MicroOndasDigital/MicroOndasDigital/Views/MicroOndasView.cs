@@ -14,10 +14,9 @@ namespace MicroOndasDigital
 
         public string TempoValue { get; set; }
         public string PotenciaValue { get => potenciaTextBox.Text; set => potenciaTextBox.Text = value; }
+        public string Display { get => displayInfo.Text; set => displayInfo.Text = value; }
         public bool Pausar { get; set; }
         public bool Limpar { get; set; }
-
-
 
         public MicroOndasView()
         {
@@ -129,7 +128,7 @@ namespace MicroOndasDigital
                 }
                 else
                 {
-                    MessageBox.Show("Valor fora do intervalo permitido, mínimo 1s - máximo 120s");
+                    MessageBox.Show($"Valor fora do intervalo permitido, mínimo 1s - máximo 120s");
 
                     if (Segundos <= 200)
                         timer1.Start();
@@ -137,6 +136,7 @@ namespace MicroOndasDigital
 
                 Incrementar = true;
                 Pausar = false;
+                Limpar = true;
             };
 
             //Evento Click do botão pausar
@@ -147,8 +147,7 @@ namespace MicroOndasDigital
 
                 if(Limpar == true)
                 {
-                    relogioLabel.Text = TempoFormatado(0);
-                    Segundos = 0;
+                    LimparDados();
                 }
             };
         }
@@ -156,16 +155,36 @@ namespace MicroOndasDigital
         //Decrementando o tempo do timer
         private void timer1_Tick(object sender, EventArgs e)
         {
+            int potencia = int.Parse(PotenciaValue);
+            string pontos = "";
+
+            for (int i = 0; i < potencia; i++)
+                pontos += ".";
+
             if (Segundos > 0)
             {
                 Segundos--;
                 relogioLabel.Text = TempoFormatado(Segundos);
+
+                //String informativa do processo de aquecimento
+                displayInfo.Text += pontos + " ";
             }
             else
             {
                 timer1.Stop();
+                LimparDados();
                 MessageBox.Show("Aquecimento concluído");
             }
+        }
+
+        private void LimparDados()
+        {
+            displayInfo.Text = "";
+            relogioLabel.Text = TempoFormatado(0);
+            TempoValue = "0";
+            PotenciaValue = "10";
+            Segundos = 0;
+            Incrementar = false;
         }
 
         private static string TempoFormatado(string segundos)

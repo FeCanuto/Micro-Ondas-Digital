@@ -16,8 +16,8 @@ namespace MicroOndasDigital.Presenters
             this.View.InicializaoRapidaEvent += IniciarAquecimento;
             this.View.PausarAquecimentoEvent += PausarAquecimento;
             this.View.SelecionarProgramaEvent += SelecionarPrograma;
-            this.View.Limpar = true;
         }
+
 
         //Lógica relacionada ao aquecimento
         private void IniciarAquecimento(object? sender, EventArgs e)

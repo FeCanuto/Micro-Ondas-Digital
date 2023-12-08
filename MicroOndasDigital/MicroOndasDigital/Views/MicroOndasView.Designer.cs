@@ -31,6 +31,11 @@ namespace MicroOndasDigital
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("! ->Pipoca");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("@ -> Leite");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("# -> Carnes de boi");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("$ -> Frango");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("% -> Feijão");
             this.iniciarButton = new System.Windows.Forms.Button();
             this.pausarButton = new System.Windows.Forms.Button();
             this.buttonNumber2 = new System.Windows.Forms.Button();
@@ -46,29 +51,34 @@ namespace MicroOndasDigital
             this.panel1 = new System.Windows.Forms.Panel();
             this.potenciaLabel = new System.Windows.Forms.Label();
             this.potenciaTextBox = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.relogioLabel = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.displayInfo = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // iniciarButton
             // 
-            this.iniciarButton.Location = new System.Drawing.Point(420, 281);
+            this.iniciarButton.Location = new System.Drawing.Point(442, 302);
             this.iniciarButton.Name = "iniciarButton";
             this.iniciarButton.Size = new System.Drawing.Size(75, 23);
             this.iniciarButton.TabIndex = 0;
-            this.iniciarButton.Text = "Iniciar";
+            this.iniciarButton.Text = "Iniciar / 30s";
             this.iniciarButton.UseVisualStyleBackColor = true;
             // 
             // pausarButton
             // 
-            this.pausarButton.Location = new System.Drawing.Point(339, 281);
+            this.pausarButton.Location = new System.Drawing.Point(339, 302);
             this.pausarButton.Name = "pausarButton";
-            this.pausarButton.Size = new System.Drawing.Size(75, 23);
+            this.pausarButton.Size = new System.Drawing.Size(97, 23);
             this.pausarButton.TabIndex = 1;
-            this.pausarButton.Text = "Pausar";
+            this.pausarButton.Text = "Pause/Cancel";
             this.pausarButton.UseVisualStyleBackColor = true;
             // 
             // buttonNumber2
@@ -173,6 +183,7 @@ namespace MicroOndasDigital
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panel1.Controls.Add(this.buttonNumber9);
             this.panel1.Controls.Add(this.buttonNumber2);
             this.panel1.Controls.Add(this.buttonNumber7);
@@ -183,7 +194,7 @@ namespace MicroOndasDigital
             this.panel1.Controls.Add(this.buttonNumber5);
             this.panel1.Controls.Add(this.buttonNumber4);
             this.panel1.Controls.Add(this.buttonNumber3);
-            this.panel1.Location = new System.Drawing.Point(339, 93);
+            this.panel1.Location = new System.Drawing.Point(350, 93);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(156, 145);
             this.panel1.TabIndex = 12;
@@ -207,17 +218,10 @@ namespace MicroOndasDigital
             this.potenciaTextBox.TabIndex = 16;
             this.potenciaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.potenciaTextBox_KeyPress);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(314, 292);
-            this.pictureBox1.TabIndex = 17;
-            this.pictureBox1.TabStop = false;
-            // 
             // relogioLabel
             // 
             this.relogioLabel.AutoSize = true;
+            this.relogioLabel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.relogioLabel.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.relogioLabel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.relogioLabel.Location = new System.Drawing.Point(332, 6);
@@ -231,22 +235,98 @@ namespace MicroOndasDigital
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // displayInfo
+            // 
+            this.displayInfo.Location = new System.Drawing.Point(3, 12);
+            this.displayInfo.Multiline = true;
+            this.displayInfo.Name = "displayInfo";
+            this.displayInfo.ReadOnly = true;
+            this.displayInfo.Size = new System.Drawing.Size(323, 292);
+            this.displayInfo.TabIndex = 19;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(349, 244);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(53, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Pipoca";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(408, 244);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(53, 23);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Leite";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(332, 273);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(97, 23);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "Carne Bovina";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(431, 273);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(97, 23);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "Carne Frango";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(467, 244);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(53, 23);
+            this.button5.TabIndex = 24;
+            this.button5.Text = "Feijão";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5});
+            this.listView1.Location = new System.Drawing.Point(190, 193);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(126, 103);
+            this.listView1.TabIndex = 25;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
+            // 
             // MicroOndasView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 322);
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.ClientSize = new System.Drawing.Size(536, 330);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.displayInfo);
             this.Controls.Add(this.relogioLabel);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.potenciaTextBox);
             this.Controls.Add(this.potenciaLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pausarButton);
             this.Controls.Add(this.iniciarButton);
             this.Name = "MicroOndasView";
-            this.Text = "Form1";
+            this.Text = "Micro-Ondas";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,9 +349,15 @@ namespace MicroOndasDigital
         private Panel panel1;
         private Label potenciaLabel;
         private TextBox potenciaTextBox;
-        private PictureBox pictureBox1;
         private Label relogioLabel;
         private System.Windows.Forms.Timer timer1;
+        private TextBox displayInfo;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Button button4;
+        private Button button5;
+        private ListView listView1;
 
         public event EventHandler IniciarAquecimento;
         public event EventHandler PausarAquecimento;
