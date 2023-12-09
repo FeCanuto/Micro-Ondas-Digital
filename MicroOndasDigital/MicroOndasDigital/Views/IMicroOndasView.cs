@@ -11,7 +11,14 @@ namespace MicroOndasDigital.Views
         string StringAquecimento { get; set; }       
         bool Pausar { get; set; }
         bool Limpar { get; set; }
+        int Segundos { get; set; }
+        bool Incrementar { get; set; }
+        bool Predefinido { get; set; }
+        bool Lock { get; set; }
 
+        System.Windows.Forms.Timer Timer { get; set; }
+        Label RelogioLabel { get; set; }
+        TextBox DisplayInfo { get; set; }
 
         //Eventos
         event EventHandler InicializaoRapidaEvent;

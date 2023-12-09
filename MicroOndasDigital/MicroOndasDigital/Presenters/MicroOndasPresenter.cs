@@ -6,10 +6,9 @@ namespace MicroOndasDigital.Presenters
 {
     public class MicroOndasPresenter
     {
-        private List<ProgramasModel> programasPre;
+        private readonly List<MicroOndasModel>? programasPre;
 
         IMicroOndasView View { get; set; }
-        MicroOndasModel Micro = new();
 
         public MicroOndasPresenter(IMicroOndasView view)
         {
@@ -17,92 +16,163 @@ namespace MicroOndasDigital.Presenters
             this.View.InicializaoRapidaEvent += IniciarAquecimento;
             this.View.PausarAquecimentoEvent += PausarAquecimento;
             this.View.SelecionarProgramaEvent += SelecionarPrograma;
+            this.View.Timer.Tick += new System.EventHandler(Timer_Tick);
 
-            programasPre = new List<ProgramasModel>
+            programasPre = new List<MicroOndasModel>
             {
-            new ProgramasModel("Pipoca", "Pipoca", 210, 7, "!", $"Observar o barulho de estouros do milho," +
-                $" caso houver um intervalo de mais de 10 segundos entre um estouro e outro, interrompa o aquecimento"),
-            new ProgramasModel("Leite", "Leite", 300, 5, "@", $"Cuidado com aquecimento de líquidos, " +
-                $"o choque térmico aliado ao movimento do recipiente pode causar fervura imediata causando risco de queimaduras"),
-            new ProgramasModel("Carnes de boi", "Carne em pedaço ou fatias", 840, 4, "#", $" Interrompa o processo na metade e vire" +
-                $" o conteúdo com a parte de baixo para cima para o descongelamento uniforme"),
-            new ProgramasModel("Frango", "Frango (qualquer corte)", 480, 7, "$", $" Interrompa o processo na metade e vire" +
-                $" o conteúdo com a parte de baixo para cima para o descongelamento uniforme"),
-            new ProgramasModel("Feijão", "Feijão congelado", 480, 9, "%", $"  Deixe o recipiente destampado e em casos de plástico, " +
-                $"cuidado ao retirar o recipiente pois o mesmo pode perder resistência em altas temperaturas")
+                new MicroOndasModel(
+                    "Pipoca",
+                    "Pipoca",
+                    210,
+                    7,
+                    "!",
+                    "Observar o barulho de estouros do milho, " +
+                    "caso houver um intervalo de mais de 10 segundos entre um estouro e outro, interrompa o aquecimento"
+                ),
+                new MicroOndasModel(
+                    "Leite",
+                    "Leite",
+                    300,
+                    5,
+                    "@",
+                    "Cuidado com aquecimento de líquidos, " +
+                    "o choque térmico aliado ao movimento do recipiente pode causar fervura imediata causando risco de queimaduras"
+                ),
+                new MicroOndasModel(
+                    "Carnes de boi",
+                    "Carne em pedaço ou fatias",
+                    840,
+                    4,
+                    "#",
+                    "Interrompa o processo na metade e vire " +
+                    "o conteúdo com a parte de baixo para cima para o descongelamento uniforme"
+                ),
+                new MicroOndasModel(
+                    "Frango",
+                    "Frango (qualquer corte)",
+                    480,
+                    7,
+                    "$",
+                    "Interrompa o processo na metade e vire " +
+                    "o conteúdo com a parte de baixo para cima para o descongelamento uniforme"
+                ),
+                new MicroOndasModel(
+                    "Feijão",
+                    "Feijão congelado",
+                    480,
+                    9,
+                    "%",
+                    "Deixe o recipiente destampado e em casos de plástico, " +
+                    "cuidado ao retirar o recipiente pois o mesmo pode perder resistência em altas temperaturas"
+                )
             };
         }
-
 
         //Lógica relacionada ao aquecimento
         private void IniciarAquecimento(object? sender, EventArgs e)
         {
             //Inicio Rápido
             if (this.View.TempoValue == "0")
-            {
-                Micro.Tempo = 30;
-                Micro.Potencia = int.Parse(this.View.PotenciaValue);
-                if (ValidateData(Micro))
-                    return;
+                View.TempoValue = "30";
 
-                View.TempoValue = Micro.Tempo.ToString();
-                View.PotenciaValue = Micro.Potencia.ToString();
+            //Conversão inicial da string tempo em int segundos 
+            if (View.Incrementar == false)
+                View.Segundos = int.Parse(View.TempoValue);
+
+            //Se estiver dentro do intervalo permitido e não for um programa pre-definido
+            if (View.Segundos is >= 1 and <= 120 && View.Predefinido == false)
+            {
+                /*Apenas Icrementar caso o programa não esteje pausado e o valor em segundos
+                for menor ou igual a 90 para não estourar o valor limite de 2min*/
+                if (View.Incrementar && View.Pausar != true && View.Segundos <= 90)
+                    View.Segundos += 30;
+
+                //Iniciar o temporizador do micro-ondas
+                View.RelogioLabel.Text = TempoFormatado(View.Segundos);
+                View.Timer.Start();
+            }
+            //Caso seja um programa pre-definido
+            else if (View.Predefinido == true)
+            {
+                //Iniciar o temporizador do micro-ondas
+                View.RelogioLabel.Text = TempoFormatado(View.Segundos);
+                View.Timer.Start();
+            }
+            else
+            {
+                //Caso o usuário queira incrementar o tempo além do permitido
+                MessageBox.Show($"Valor fora do intervalo permitido, mínimo 1s - máximo 120s");
+
+                if (View.Segundos <= 200)
+                    View.Timer.Start();
             }
 
-            Micro.Tempo = int.Parse(this.View.TempoValue);
-            Micro.Potencia = int.Parse(this.View.PotenciaValue);
-            if (ValidateData(Micro))
-                return;
-
-            View.TempoValue = Micro.Tempo.ToString();
-            View.PotenciaValue = Micro.Potencia.ToString();
+            View.Incrementar = true;
+            View.Pausar = false;
+            View.Limpar = true;
         }
+
+        //Decrementando o tempo do timer
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            int potencia = int.Parse(View.PotenciaValue);
+            string stringAquecimento = "";
+
+            /*Concatenando string informativa para dar ideia de processamento*/
+            for (int i = 0; i < potencia; i++)
+                stringAquecimento += View.StringAquecimento;
+
+            if (View.Segundos > 0)
+            {
+                //Decrementando Segundos
+                View.Segundos--;
+                View.RelogioLabel.Text = TempoFormatado(View.Segundos);
+
+                //String informativa do processo de aquecimento
+                View.DisplayInfo.Text += stringAquecimento + " ";
+            }
+            else
+            {
+                View.Timer.Stop();
+                LimparDados();
+                MessageBox.Show("Aquecimento concluído");
+            }
+        }
+
+        //Sobrecarga do método TempoFormatado
+        private static string TempoFormatado(int segundos)
+        {
+            TimeSpan tempo = TimeSpan.FromSeconds(segundos);
+            return tempo.ToString();
+        }
+
+        private void LimparDados()
+        {
+            //Restaurando dados a valores iniciais
+            View.DisplayInfo.Text = "";
+            View.RelogioLabel.Text = TempoFormatado(0);
+            View.TempoValue = "0";
+            View.PotenciaValue = "10";
+            View.Segundos = 0;
+            View.Incrementar = false;
+            View.Predefinido = false;
+            View.Lock = false;
+        }
+
 
         private void PausarAquecimento(object? sender, EventArgs e)
         {
+            //Setar Pausar como true caso esse evento seja invocado
             View.Pausar = true;
             View.Limpar = Toggle(View.Limpar);
-        }
 
-        private void SelecionarPrograma(object? sender, EventArgs e)
-        {
-            switch (View.StringAquecimento)
+            //Pausar timer
+            View.Timer.Stop();
+
+            //Caso o botão Pausar for precionado duas vezes
+            if (View.Limpar == true)
             {
-                case "!":
-                    View.Nome = programasPre[0].Nome;
-                    View.Alimento = programasPre[0].Alimento;
-                    View.Instrucoes = programasPre[0].Instrucoes;
-                    View.TempoValue = programasPre[0].Tempo.ToString();
-                    View.PotenciaValue = programasPre[0].Potencia.ToString();
-                    break;
-                case "@":
-                    View.Nome = programasPre[1].Nome;
-                    View.Alimento = programasPre[1].Alimento;
-                    View.Instrucoes = programasPre[1].Instrucoes;
-                    View.TempoValue = programasPre[1].Tempo.ToString();
-                    View.PotenciaValue = programasPre[1].Potencia.ToString();
-                    break;
-                case "#":
-                    View.Nome = programasPre[2].Nome;
-                    View.Alimento = programasPre[2].Alimento;
-                    View.Instrucoes = programasPre[2].Instrucoes;
-                    View.TempoValue = programasPre[2].Tempo.ToString();
-                    View.PotenciaValue = programasPre[2].Potencia.ToString();
-                    break;
-                case "$":
-                    View.Nome = programasPre[3].Nome;
-                    View.Alimento = programasPre[3].Alimento;
-                    View.Instrucoes = programasPre[3].Instrucoes;
-                    View.TempoValue = programasPre[3].Tempo.ToString();
-                    View.PotenciaValue = programasPre[3].Potencia.ToString();
-                    break;
-                case "%":
-                    View.Nome = programasPre[4].Nome;
-                    View.Alimento = programasPre[4].Alimento;
-                    View.Instrucoes = programasPre[4].Instrucoes;
-                    View.TempoValue = programasPre[4].Tempo.ToString();
-                    View.PotenciaValue = programasPre[4].Potencia.ToString();
-                    break;
+                LimparDados();
             }
         }
 
@@ -113,8 +183,59 @@ namespace MicroOndasDigital.Presenters
             return value;
         }
 
+        private void SelecionarPrograma(object? sender, EventArgs e)
+        {
+            switch (View.StringAquecimento)
+            {
+                case "!":
+                    if(!View.Predefinido)
+                        ProgramasSettingAndDisplayInfo(0);
+      
+                    break;
+
+                case "@":
+                    if (!View.Predefinido)
+                        ProgramasSettingAndDisplayInfo(1);
+
+                    break;
+
+                case "#":
+                    if (!View.Predefinido)
+                        ProgramasSettingAndDisplayInfo(2);
+                    
+                    break;
+
+                case "$":
+                    if (!View.Predefinido)
+                        ProgramasSettingAndDisplayInfo(3);
+                    
+                    break;
+
+                case "%":
+                    if (!View.Predefinido)
+                        ProgramasSettingAndDisplayInfo(4);
+                   
+                    break;
+            }
+        }
+
+        private void ProgramasSettingAndDisplayInfo(int i)
+        {
+            View.Nome = programasPre[i].Nome;
+            View.Alimento = programasPre[i].Alimento;
+            View.Instrucoes = programasPre[i].Instrucoes;
+            View.TempoValue = programasPre[i].Tempo.ToString();
+            View.PotenciaValue = programasPre[i].Potencia.ToString();
+            View.Predefinido = true;
+            View.Lock = false;
+            View.DisplayInfo.Text += "Programa: " + View.Nome + "\r\n";
+            View.DisplayInfo.Text += "Alimento: " + View.Alimento + "\r\n";
+            View.DisplayInfo.Text += "Instruções: " + View.Instrucoes + "\r\n";
+        }
+
+
         //Usando validação para DataAnnotation do Model
-        private static bool ValidateData(object obj)
+        /*private static bool ValidateData(object obj)
         {
             var erros = ModelDataValidation.ValidationErrors(obj);
             foreach (var error in erros)
@@ -128,7 +249,7 @@ namespace MicroOndasDigital.Presenters
             }
 
             return false;
-        }
+        }*/
 
     }
 }

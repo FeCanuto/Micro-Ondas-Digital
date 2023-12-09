@@ -30,12 +30,11 @@ namespace MicroOndasDigital
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("! ->Pipoca");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("@ -> Leite");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("# -> Carnes de boi");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("$ -> Frango");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("% -> Feijão");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("! ->Pipoca");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("@ -> Leite");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("# -> Carnes de boi");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("$ -> Frango");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("% -> Feijão");
             this.iniciarButton = new System.Windows.Forms.Button();
             this.pausarButton = new System.Windows.Forms.Button();
             this.buttonNumber2 = new System.Windows.Forms.Button();
@@ -51,15 +50,13 @@ namespace MicroOndasDigital
             this.panel1 = new System.Windows.Forms.Panel();
             this.potenciaLabel = new System.Windows.Forms.Label();
             this.potenciaTextBox = new System.Windows.Forms.TextBox();
-            this.relogioLabel = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.displayInfo = new System.Windows.Forms.TextBox();
             this.pipocaButton = new System.Windows.Forms.Button();
             this.leiteButton = new System.Windows.Forms.Button();
             this.boiButton = new System.Windows.Forms.Button();
             this.nuggetsButton = new System.Windows.Forms.Button();
             this.feijaoButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.adicionarProgramaButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -220,32 +217,6 @@ namespace MicroOndasDigital
             this.potenciaTextBox.TabIndex = 16;
             this.potenciaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.potenciaTextBox_KeyPress);
             // 
-            // relogioLabel
-            // 
-            this.relogioLabel.AutoSize = true;
-            this.relogioLabel.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.relogioLabel.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.relogioLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.relogioLabel.Location = new System.Drawing.Point(343, 6);
-            this.relogioLabel.Name = "relogioLabel";
-            this.relogioLabel.Size = new System.Drawing.Size(174, 51);
-            this.relogioLabel.TabIndex = 18;
-            this.relogioLabel.Text = "00:00:00";
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // displayInfo
-            // 
-            this.displayInfo.Location = new System.Drawing.Point(3, 6);
-            this.displayInfo.Multiline = true;
-            this.displayInfo.Name = "displayInfo";
-            this.displayInfo.ReadOnly = true;
-            this.displayInfo.Size = new System.Drawing.Size(323, 292);
-            this.displayInfo.TabIndex = 19;
-            // 
             // pipocaButton
             // 
             this.pipocaButton.Location = new System.Drawing.Point(349, 244);
@@ -268,21 +239,21 @@ namespace MicroOndasDigital
             // 
             // boiButton
             // 
-            this.boiButton.Location = new System.Drawing.Point(332, 273);
+            this.boiButton.Location = new System.Drawing.Point(350, 273);
             this.boiButton.Name = "boiButton";
-            this.boiButton.Size = new System.Drawing.Size(97, 23);
+            this.boiButton.Size = new System.Drawing.Size(52, 23);
             this.boiButton.TabIndex = 22;
-            this.boiButton.Text = "Carne Bovina";
+            this.boiButton.Text = "Meat";
             this.boiButton.UseVisualStyleBackColor = true;
             this.boiButton.Click += new System.EventHandler(this.boiButton_Click);
             // 
             // nuggetsButton
             // 
-            this.nuggetsButton.Location = new System.Drawing.Point(431, 273);
+            this.nuggetsButton.Location = new System.Drawing.Point(408, 273);
             this.nuggetsButton.Name = "nuggetsButton";
-            this.nuggetsButton.Size = new System.Drawing.Size(97, 23);
+            this.nuggetsButton.Size = new System.Drawing.Size(53, 23);
             this.nuggetsButton.TabIndex = 23;
-            this.nuggetsButton.Text = "Carne Frango";
+            this.nuggetsButton.Text = "Frango";
             this.nuggetsButton.UseVisualStyleBackColor = true;
             this.nuggetsButton.Click += new System.EventHandler(this.nuggetsButton_Click);
             // 
@@ -300,11 +271,11 @@ namespace MicroOndasDigital
             // 
             this.listView1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5});
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
             this.listView1.Location = new System.Drawing.Point(189, 183);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(126, 103);
@@ -312,20 +283,29 @@ namespace MicroOndasDigital
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
             // 
+            // adicionarProgramaButton
+            // 
+            this.adicionarProgramaButton.Location = new System.Drawing.Point(467, 273);
+            this.adicionarProgramaButton.Name = "adicionarProgramaButton";
+            this.adicionarProgramaButton.Size = new System.Drawing.Size(53, 23);
+            this.adicionarProgramaButton.TabIndex = 26;
+            this.adicionarProgramaButton.Text = "Add";
+            this.adicionarProgramaButton.UseVisualStyleBackColor = true;
+            this.adicionarProgramaButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MicroOndasView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(536, 330);
+            this.ClientSize = new System.Drawing.Size(543, 371);
+            this.Controls.Add(this.adicionarProgramaButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.feijaoButton);
             this.Controls.Add(this.nuggetsButton);
             this.Controls.Add(this.boiButton);
             this.Controls.Add(this.leiteButton);
             this.Controls.Add(this.pipocaButton);
-            this.Controls.Add(this.displayInfo);
-            this.Controls.Add(this.relogioLabel);
             this.Controls.Add(this.potenciaTextBox);
             this.Controls.Add(this.potenciaLabel);
             this.Controls.Add(this.panel1);
@@ -356,14 +336,52 @@ namespace MicroOndasDigital
         private Panel panel1;
         private Label potenciaLabel;
         private TextBox potenciaTextBox;
-        private Label relogioLabel;
-        private System.Windows.Forms.Timer timer1;
-        private TextBox displayInfo;
         private Button pipocaButton;
         private Button leiteButton;
         private Button boiButton;
         private Button nuggetsButton;
         private Button feijaoButton;
         private ListView listView1;
+
+        partial void InitializeOtherComponents()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.RelogioLabel = new System.Windows.Forms.Label();
+            this.Timer = new System.Windows.Forms.Timer(this.components);
+            this.DisplayInfo = new System.Windows.Forms.TextBox();
+
+            // 
+            // relogioLabel
+            // 
+            this.RelogioLabel.AutoSize = true;
+            this.RelogioLabel.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.RelogioLabel.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.RelogioLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.RelogioLabel.Location = new System.Drawing.Point(343, 6);
+            this.RelogioLabel.Name = "relogioLabel";
+            this.RelogioLabel.Size = new System.Drawing.Size(174, 51);
+            this.RelogioLabel.TabIndex = 18;
+            this.RelogioLabel.Text = "00:00:00";
+            // 
+            // timer1
+            // 
+            this.Timer.Interval = 1000;
+            // 
+            // displayInfo
+            // 
+            this.DisplayInfo.Location = new System.Drawing.Point(3, 6);
+            this.DisplayInfo.Multiline = true;
+            this.DisplayInfo.Name = "displayInfo";
+            this.DisplayInfo.ReadOnly = true;
+            this.DisplayInfo.Size = new System.Drawing.Size(323, 292);
+            this.DisplayInfo.TabIndex = 19;
+
+            //MicroOndasView
+            this.Controls.Add(this.DisplayInfo);
+            this.Controls.Add(this.RelogioLabel);
+        }
+
+        private Button adicionarProgramaButton;
     }
+
 }
