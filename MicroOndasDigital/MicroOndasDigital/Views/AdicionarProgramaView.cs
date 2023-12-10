@@ -1,7 +1,4 @@
-﻿
-using MicroOndasDigital.Presenters;
-
-namespace MicroOndasDigital.Views
+﻿namespace MicroOndasDigital.Views
 {
     public partial class AdicionarProgramaView : Form, IAdicionarProgramaView
     {

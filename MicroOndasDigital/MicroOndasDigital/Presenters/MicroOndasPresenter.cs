@@ -179,6 +179,7 @@ namespace MicroOndasDigital.Presenters
         private void LimparDados()
         {
             //Restaurando dados a valores iniciais
+            View.StringAquecimento = ".";
             View.DisplayInfo.Text = "";
             View.RelogioLabel.Text = TempoFormatado(0);
             View.TempoValue = "0";

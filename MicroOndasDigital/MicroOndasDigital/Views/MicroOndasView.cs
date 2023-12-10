@@ -1,11 +1,9 @@
-using MicroOndasDigital.Presenters;
 using MicroOndasDigital.Views;
 
 namespace MicroOndasDigital
 {
     public partial class MicroOndasView : Form, IMicroOndasView
     {
-        private MicroOndasPresenter Presenter;
 
         public event EventHandler? InicializaoRapidaEvent;
         public event EventHandler? PausarAquecimentoEvent;
