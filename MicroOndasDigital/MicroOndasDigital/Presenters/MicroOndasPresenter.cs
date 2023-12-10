@@ -1,6 +1,7 @@
 ﻿using MicroOndasDigital.Models;
 using MicroOndasDigital.Presenters.Common;
 using MicroOndasDigital.Views;
+using Newtonsoft.Json;
 
 namespace MicroOndasDigital.Presenters
 {
@@ -9,9 +10,13 @@ namespace MicroOndasDigital.Presenters
         private readonly List<MicroOndasModel>? programasPre;
 
         IMicroOndasView View { get; set; }
+        IAdicionarProgramaView AddView { get; set; }
 
-        public MicroOndasPresenter(IMicroOndasView view)
+        public MicroOndasPresenter(IMicroOndasView view, IAdicionarProgramaView addView)
         {
+            this.AddView = addView;
+            this.AddView.AdicionarProgramaEvent += AdicionarPrograma;
+
             this.View = view;
             this.View.InicializaoRapidaEvent += IniciarAquecimento;
             this.View.PausarAquecimentoEvent += PausarAquecimento;
@@ -27,7 +32,8 @@ namespace MicroOndasDigital.Presenters
                     7,
                     "!",
                     "Observar o barulho de estouros do milho, " +
-                    "caso houver um intervalo de mais de 10 segundos entre um estouro e outro, interrompa o aquecimento"
+                    "caso houver um intervalo de mais de 10 segundos entre um estouro e outro, interrompa o aquecimento",
+                    false
                 ),
                 new MicroOndasModel(
                     "Leite",
@@ -36,7 +42,8 @@ namespace MicroOndasDigital.Presenters
                     5,
                     "@",
                     "Cuidado com aquecimento de líquidos, " +
-                    "o choque térmico aliado ao movimento do recipiente pode causar fervura imediata causando risco de queimaduras"
+                    "o choque térmico aliado ao movimento do recipiente pode causar fervura imediata causando risco de queimaduras",
+                    false
                 ),
                 new MicroOndasModel(
                     "Carnes de boi",
@@ -45,7 +52,8 @@ namespace MicroOndasDigital.Presenters
                     4,
                     "#",
                     "Interrompa o processo na metade e vire " +
-                    "o conteúdo com a parte de baixo para cima para o descongelamento uniforme"
+                    "o conteúdo com a parte de baixo para cima para o descongelamento uniforme",
+                    false
                 ),
                 new MicroOndasModel(
                     "Frango",
@@ -54,7 +62,8 @@ namespace MicroOndasDigital.Presenters
                     7,
                     "$",
                     "Interrompa o processo na metade e vire " +
-                    "o conteúdo com a parte de baixo para cima para o descongelamento uniforme"
+                    "o conteúdo com a parte de baixo para cima para o descongelamento uniforme",
+                    false
                 ),
                 new MicroOndasModel(
                     "Feijão",
@@ -63,9 +72,30 @@ namespace MicroOndasDigital.Presenters
                     9,
                     "%",
                     "Deixe o recipiente destampado e em casos de plástico, " +
-                    "cuidado ao retirar o recipiente pois o mesmo pode perder resistência em altas temperaturas"
+                    "cuidado ao retirar o recipiente pois o mesmo pode perder resistência em altas temperaturas",
+                    false
                 )
             };
+        }
+
+        private void AdicionarPrograma(object? sender, EventArgs e)
+        {
+            MicroOndasModel novoPrograma = new MicroOndasModel(AddView.Nome,
+                AddView.Alimento,
+                int.Parse(AddView.TempoValue),
+                int.Parse(AddView.PotenciaValue),
+                AddView.StringAquecimento,
+                AddView.Instrucoes,
+                true);
+
+            programasPre.Add(novoPrograma);
+
+            string json = JsonConvert.SerializeObject(programasPre);
+            string diretorio = AppDomain.CurrentDomain.BaseDirectory;
+            string path = Path.Combine(diretorio, "..\\..\\..\\Archive");
+            File.WriteAllText(path, json);
+
+            MessageBox.Show($"Programa adicionado com sucesso");
         }
 
         //Lógica relacionada ao aquecimento
@@ -152,11 +182,11 @@ namespace MicroOndasDigital.Presenters
             View.DisplayInfo.Text = "";
             View.RelogioLabel.Text = TempoFormatado(0);
             View.TempoValue = "0";
+            View.Lock = false;
             View.PotenciaValue = "10";
             View.Segundos = 0;
             View.Incrementar = false;
             View.Predefinido = false;
-            View.Lock = false;
         }
 
 
@@ -227,7 +257,7 @@ namespace MicroOndasDigital.Presenters
             View.TempoValue = programasPre[i].Tempo.ToString();
             View.PotenciaValue = programasPre[i].Potencia.ToString();
             View.Predefinido = true;
-            View.Lock = false;
+            View.Lock = true;
             View.DisplayInfo.Text += "Programa: " + View.Nome + "\r\n";
             View.DisplayInfo.Text += "Alimento: " + View.Alimento + "\r\n";
             View.DisplayInfo.Text += "Instruções: " + View.Instrucoes + "\r\n";

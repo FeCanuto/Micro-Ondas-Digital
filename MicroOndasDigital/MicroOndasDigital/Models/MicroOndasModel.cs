@@ -8,8 +8,10 @@
         public int Potencia { get; set; }
         public string AquecimentoString { get; set; }
         public string Instrucoes { get; set; }
+        public bool Custom { get; set; }
 
-        public MicroOndasModel(string nome, string alimento, int tempo, int potencia, string aquecimentoString, string instrucoes)
+
+        public MicroOndasModel(string nome, string alimento, int tempo, int potencia, string aquecimentoString, string instrucoes, bool custom)
         {
             Nome = nome;
             Alimento = alimento;
@@ -17,6 +19,7 @@
             Potencia = potencia;
             AquecimentoString = aquecimentoString;
             Instrucoes = instrucoes;
+            Custom = custom;
         }
     }
 }

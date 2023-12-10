@@ -1,9 +1,12 @@
+using MicroOndasDigital.Presenters;
 using MicroOndasDigital.Views;
 
 namespace MicroOndasDigital
 {
     public partial class MicroOndasView : Form, IMicroOndasView
-    {       
+    {
+        private MicroOndasPresenter Presenter;
+
         public event EventHandler? InicializaoRapidaEvent;
         public event EventHandler? PausarAquecimentoEvent;
         public event EventHandler? SelecionarProgramaEvent;
@@ -12,7 +15,7 @@ namespace MicroOndasDigital
         public string Alimento { get; set; } = string.Empty;
         public string Instrucoes { get; set; } = string.Empty;
         public string TempoValue { get; set; } = string.Empty;
-        public string PotenciaValue { get => potenciaTextBox.Text; set => potenciaTextBox.Text = value; }
+        public string PotenciaValue { get => potenciaNumericUpDown.Text; set => potenciaNumericUpDown.Text = value; }
         public string StringAquecimento { get; set; } = string.Empty;
         public bool Pausar { get; set; }
         public bool Limpar { get; set; }
@@ -35,7 +38,7 @@ namespace MicroOndasDigital
             //Valores default
             StringAquecimento = ".";
             TempoValue = "0";
-            potenciaTextBox.Text = "10";
+            potenciaNumericUpDown.Text = "10";
         }
 
         private void buttonNumber0_Click(object sender, EventArgs e)
@@ -98,24 +101,6 @@ namespace MicroOndasDigital
             RelogioLabel.Text = TempoFormatado(TempoValue);
         }
 
-        //Permitindo apenas digitos
-        private void tempoTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        //Permitindo apenas digitos
-        private void potenciaTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void AssociateAndRaiseViewEvents()
         {
             //Evento click do botão iniciar
@@ -171,9 +156,25 @@ namespace MicroOndasDigital
             SelecionarProgramaEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void programaPersonalizadoButton_Click(object sender, EventArgs e)
         {
+            AdicionarProgramaView adicionarProgramaView = new AdicionarProgramaView();
+            adicionarProgramaView.Show(this);
+        }
 
+        private void potenciaNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (Lock)
+            {
+                potenciaNumericUpDown.ReadOnly = true;
+                potenciaNumericUpDown.Enabled = false;
+                potenciaNumericUpDown.Text = PotenciaValue;
+            }
+            else
+            {
+                potenciaNumericUpDown.ReadOnly = false;
+                potenciaNumericUpDown.Enabled = true;
+            }
         }
     }
 }

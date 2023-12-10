@@ -30,11 +30,11 @@ namespace MicroOndasDigital
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("! ->Pipoca");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("@ -> Leite");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("# -> Carnes de boi");
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("$ -> Frango");
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("% -> Feijão");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("! ->Pipoca");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("@ -> Leite");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("# -> Carnes de boi");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("$ -> Frango");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("% -> Feijão");
             this.iniciarButton = new System.Windows.Forms.Button();
             this.pausarButton = new System.Windows.Forms.Button();
             this.buttonNumber2 = new System.Windows.Forms.Button();
@@ -49,21 +49,23 @@ namespace MicroOndasDigital
             this.buttonNumber9 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.potenciaLabel = new System.Windows.Forms.Label();
-            this.potenciaTextBox = new System.Windows.Forms.TextBox();
             this.pipocaButton = new System.Windows.Forms.Button();
             this.leiteButton = new System.Windows.Forms.Button();
             this.boiButton = new System.Windows.Forms.Button();
             this.nuggetsButton = new System.Windows.Forms.Button();
             this.feijaoButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.adicionarProgramaButton = new System.Windows.Forms.Button();
+            this.novoProgramaButton = new System.Windows.Forms.Button();
+            this.programaPersonalizadoButton = new System.Windows.Forms.Button();
+            this.potenciaNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.potenciaNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // iniciarButton
             // 
             this.iniciarButton.BackColor = System.Drawing.Color.LightGreen;
-            this.iniciarButton.Location = new System.Drawing.Point(442, 302);
+            this.iniciarButton.Location = new System.Drawing.Point(545, 322);
             this.iniciarButton.Name = "iniciarButton";
             this.iniciarButton.Size = new System.Drawing.Size(75, 23);
             this.iniciarButton.TabIndex = 0;
@@ -73,7 +75,7 @@ namespace MicroOndasDigital
             // pausarButton
             // 
             this.pausarButton.BackColor = System.Drawing.Color.Tomato;
-            this.pausarButton.Location = new System.Drawing.Point(339, 302);
+            this.pausarButton.Location = new System.Drawing.Point(449, 322);
             this.pausarButton.Name = "pausarButton";
             this.pausarButton.Size = new System.Drawing.Size(97, 23);
             this.pausarButton.TabIndex = 1;
@@ -193,7 +195,7 @@ namespace MicroOndasDigital
             this.panel1.Controls.Add(this.buttonNumber5);
             this.panel1.Controls.Add(this.buttonNumber4);
             this.panel1.Controls.Add(this.buttonNumber3);
-            this.panel1.Location = new System.Drawing.Point(350, 93);
+            this.panel1.Location = new System.Drawing.Point(456, 89);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(156, 145);
             this.panel1.TabIndex = 12;
@@ -201,25 +203,15 @@ namespace MicroOndasDigital
             // potenciaLabel
             // 
             this.potenciaLabel.AutoSize = true;
-            this.potenciaLabel.Location = new System.Drawing.Point(339, 67);
+            this.potenciaLabel.Location = new System.Drawing.Point(456, 63);
             this.potenciaLabel.Name = "potenciaLabel";
             this.potenciaLabel.Size = new System.Drawing.Size(53, 15);
             this.potenciaLabel.TabIndex = 14;
             this.potenciaLabel.Text = "Potência";
             // 
-            // potenciaTextBox
-            // 
-            this.potenciaTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.potenciaTextBox.Location = new System.Drawing.Point(395, 64);
-            this.potenciaTextBox.MaxLength = 2;
-            this.potenciaTextBox.Name = "potenciaTextBox";
-            this.potenciaTextBox.Size = new System.Drawing.Size(100, 23);
-            this.potenciaTextBox.TabIndex = 16;
-            this.potenciaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.potenciaTextBox_KeyPress);
-            // 
             // pipocaButton
             // 
-            this.pipocaButton.Location = new System.Drawing.Point(349, 244);
+            this.pipocaButton.Location = new System.Drawing.Point(449, 240);
             this.pipocaButton.Name = "pipocaButton";
             this.pipocaButton.Size = new System.Drawing.Size(53, 23);
             this.pipocaButton.TabIndex = 20;
@@ -229,7 +221,7 @@ namespace MicroOndasDigital
             // 
             // leiteButton
             // 
-            this.leiteButton.Location = new System.Drawing.Point(408, 244);
+            this.leiteButton.Location = new System.Drawing.Point(508, 240);
             this.leiteButton.Name = "leiteButton";
             this.leiteButton.Size = new System.Drawing.Size(53, 23);
             this.leiteButton.TabIndex = 21;
@@ -239,7 +231,7 @@ namespace MicroOndasDigital
             // 
             // boiButton
             // 
-            this.boiButton.Location = new System.Drawing.Point(350, 273);
+            this.boiButton.Location = new System.Drawing.Point(450, 269);
             this.boiButton.Name = "boiButton";
             this.boiButton.Size = new System.Drawing.Size(52, 23);
             this.boiButton.TabIndex = 22;
@@ -249,7 +241,7 @@ namespace MicroOndasDigital
             // 
             // nuggetsButton
             // 
-            this.nuggetsButton.Location = new System.Drawing.Point(408, 273);
+            this.nuggetsButton.Location = new System.Drawing.Point(508, 269);
             this.nuggetsButton.Name = "nuggetsButton";
             this.nuggetsButton.Size = new System.Drawing.Size(53, 23);
             this.nuggetsButton.TabIndex = 23;
@@ -259,7 +251,7 @@ namespace MicroOndasDigital
             // 
             // feijaoButton
             // 
-            this.feijaoButton.Location = new System.Drawing.Point(467, 244);
+            this.feijaoButton.Location = new System.Drawing.Point(567, 240);
             this.feijaoButton.Name = "feijaoButton";
             this.feijaoButton.Size = new System.Drawing.Size(53, 23);
             this.feijaoButton.TabIndex = 24;
@@ -271,42 +263,60 @@ namespace MicroOndasDigital
             // 
             this.listView1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem6,
-            listViewItem7,
-            listViewItem8,
-            listViewItem9,
-            listViewItem10});
-            this.listView1.Location = new System.Drawing.Point(189, 183);
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5});
+            this.listView1.Location = new System.Drawing.Point(322, 231);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(126, 103);
+            this.listView1.Size = new System.Drawing.Size(110, 103);
             this.listView1.TabIndex = 25;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
             // 
-            // adicionarProgramaButton
+            // novoProgramaButton
             // 
-            this.adicionarProgramaButton.Location = new System.Drawing.Point(467, 273);
-            this.adicionarProgramaButton.Name = "adicionarProgramaButton";
-            this.adicionarProgramaButton.Size = new System.Drawing.Size(53, 23);
-            this.adicionarProgramaButton.TabIndex = 26;
-            this.adicionarProgramaButton.Text = "Add";
-            this.adicionarProgramaButton.UseVisualStyleBackColor = true;
-            this.adicionarProgramaButton.Click += new System.EventHandler(this.button1_Click);
+            this.novoProgramaButton.Location = new System.Drawing.Point(567, 269);
+            this.novoProgramaButton.Name = "novoProgramaButton";
+            this.novoProgramaButton.Size = new System.Drawing.Size(53, 23);
+            this.novoProgramaButton.TabIndex = 26;
+            this.novoProgramaButton.Text = "-";
+            this.novoProgramaButton.UseVisualStyleBackColor = true;
+            // 
+            // programaPersonalizadoButton
+            // 
+            this.programaPersonalizadoButton.Location = new System.Drawing.Point(449, 298);
+            this.programaPersonalizadoButton.Name = "programaPersonalizadoButton";
+            this.programaPersonalizadoButton.Size = new System.Drawing.Size(171, 23);
+            this.programaPersonalizadoButton.TabIndex = 27;
+            this.programaPersonalizadoButton.Text = "Programa Personalizado";
+            this.programaPersonalizadoButton.UseVisualStyleBackColor = true;
+            this.programaPersonalizadoButton.Click += new System.EventHandler(this.programaPersonalizadoButton_Click);
+            // 
+            // potenciaNumericUpDown
+            // 
+            this.potenciaNumericUpDown.Location = new System.Drawing.Point(515, 60);
+            this.potenciaNumericUpDown.Name = "potenciaNumericUpDown";
+            this.potenciaNumericUpDown.Size = new System.Drawing.Size(37, 23);
+            this.potenciaNumericUpDown.TabIndex = 28;
+            this.potenciaNumericUpDown.ValueChanged += new System.EventHandler(this.potenciaNumericUpDown_ValueChanged);
             // 
             // MicroOndasView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(543, 371);
-            this.Controls.Add(this.adicionarProgramaButton);
+            this.ClientSize = new System.Drawing.Size(632, 357);
+            this.Controls.Add(this.potenciaNumericUpDown);
+            this.Controls.Add(this.programaPersonalizadoButton);
+            this.Controls.Add(this.novoProgramaButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.feijaoButton);
             this.Controls.Add(this.nuggetsButton);
             this.Controls.Add(this.boiButton);
             this.Controls.Add(this.leiteButton);
             this.Controls.Add(this.pipocaButton);
-            this.Controls.Add(this.potenciaTextBox);
             this.Controls.Add(this.potenciaLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pausarButton);
@@ -314,6 +324,7 @@ namespace MicroOndasDigital
             this.Name = "MicroOndasView";
             this.Text = "Micro-Ondas";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.potenciaNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,7 +346,6 @@ namespace MicroOndasDigital
         private Button buttonNumber9;
         private Panel panel1;
         private Label potenciaLabel;
-        private TextBox potenciaTextBox;
         private Button pipocaButton;
         private Button leiteButton;
         private Button boiButton;
@@ -357,7 +367,7 @@ namespace MicroOndasDigital
             this.RelogioLabel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.RelogioLabel.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.RelogioLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.RelogioLabel.Location = new System.Drawing.Point(343, 6);
+            this.RelogioLabel.Location = new System.Drawing.Point(450, 6);
             this.RelogioLabel.Name = "relogioLabel";
             this.RelogioLabel.Size = new System.Drawing.Size(174, 51);
             this.RelogioLabel.TabIndex = 18;
@@ -373,7 +383,7 @@ namespace MicroOndasDigital
             this.DisplayInfo.Multiline = true;
             this.DisplayInfo.Name = "displayInfo";
             this.DisplayInfo.ReadOnly = true;
-            this.DisplayInfo.Size = new System.Drawing.Size(323, 292);
+            this.DisplayInfo.Size = new System.Drawing.Size(440, 340);
             this.DisplayInfo.TabIndex = 19;
 
             //MicroOndasView
@@ -381,7 +391,9 @@ namespace MicroOndasDigital
             this.Controls.Add(this.RelogioLabel);
         }
 
-        private Button adicionarProgramaButton;
+        private Button novoProgramaButton;
+        private Button programaPersonalizadoButton;
+        private NumericUpDown potenciaNumericUpDown;
     }
 
 }

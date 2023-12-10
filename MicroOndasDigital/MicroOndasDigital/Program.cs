@@ -20,8 +20,10 @@ namespace MicroOndasDigital
         public static void Start()
         {
             IMicroOndasView view = new MicroOndasView();
-            new MicroOndasPresenter(view);
+            IAdicionarProgramaView adicionar = new AdicionarProgramaView();
+            new MicroOndasPresenter(view, adicionar);
             Application.Run((Form)view);
+            //Application.Run((Form)adicionar);
         }
     }
 }
