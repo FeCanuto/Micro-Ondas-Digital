@@ -101,6 +101,14 @@ namespace MicroOndasDigital.Presenters
         //Lógica relacionada ao aquecimento
         private void IniciarAquecimento(object? sender, EventArgs e)
         {
+            int potencia = int.Parse(View.PotenciaValue);
+
+            if (potencia > 10 || potencia < 1)
+            {
+                MessageBox.Show($"Valor fora do intervalo permitido, mínimo 1 - máximo 10");
+                return;
+            }
+
             //Inicio Rápido
             if (this.View.TempoValue == "0")
                 View.TempoValue = "30";
